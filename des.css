@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: #e7feff;
+    overflow: hidden;
+}
+/* chữ */
+.center-text {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*căn giữa hoàn hảo */
+    font-size: 48px;
+    font-weight: bold;
+    color: #ff4d94;
+    text-shadow: 0 0 10px white, 0 0 20px #ff4d94;
+    z-index: 10; /* đảm bảo nổi trên mưa */
+}
+/* thân hình trụ*/
+.raindrop {
+    position: absolute;
+    top: -120px;
+    width: 20px;
+    height: 50px;
+    background-color: lightpink;
+    border-radius: 9999px;
+    filter: drop-shadow(0 0 8px lightpink);
+    animation: fall 4s linear infinite, glow  1.5s ease-in-out infinite alternate;
+}
+/* hai hình tròn ở đáy thân */
+.raindrop::before,
+.raindrop::after {
+    content:"";
+    position:absolute;
+    bottom: -10px; /* gắn phía dưới thân */
+    width: 20px;
+    height: 20px;
+    background:  lightpink;
+    border-radius: 50%;
+}
+.raindrop::before { left:-10px; } /* tròn bên trái */
+.raindrop::after {right: -10px; } /* tròn bên phải */
+/* hiệu ứng rơi */
+@keyframes fall {
+    from {transform: translateY(-120px) rotate(0deg); opacity: 1; }
+    to { transform: translateY(110vh) rotate(360deg); opacity: 0.7;}
+}
+@keyframes glow {
+    from { filter: drop-shadow(0 0 5px #ff99cc); }
+    to { filter: drop-shadow(0 0 15px #ff99cc); }
+}
+    /* vị trí và delay khác nhau mỗi cu */
+    .raindrop:nth-child(1) { left: 5%; animation-delay: 0s; }
+    .raindrop:nth-child(2) { left: 15%; animation-delay: 1s; }
+    .raindrop:nth-child(3) { left: 25%; animation-delay: 2s; }
+    .raindrop:nth-child(4) { left: 40%; animation-delay: 0.5s; }  
+    .raindrop:nth-child(5) { left: 55%; animation-delay: 1.5s; }
+    .raindrop:nth-child(6) { left: 70%; animation-delay: 2.5s; }
+    .raindrop:nth-child(7) { left: 85%; animation-delay: 3s; }
+    .raindrop:nth-child(8) { left: 60%; animation-delay: 0.8s; }
+    .raindrop:nth-child(9) { left: 30%; animation-delay: 2.2s; }
+    .raindrop:nth-child(10) {left: 75%; animation-delay: 1.2s; }
+/* mobile (<600px) */
+@media (max-width: 599px) {
+    .center-text { font-size: 28px; text-shadow: 0 0 6px #e7feff, 0 0 14px #ff4d94;
+    animation-duration: 1.8s; }
+    .raindrop {width: 12px; height: 30px; }
+    .raindrop::before, .raindrop::after { width: 12px; height: 12px; bottom: -6px; }
+}
+/*desktop (>=600px) */
+@media (min-width: 600px) {
+    .center-text {font-size: 48px; text-shadow: 0 0 10px #e7feff, 0 0 22px #ff4d94;
+    animation-duration: 1.4s;}
+    .raindrop { width: 20px; height: 50px; }
+    .raindrop::before, .raindrop::after { width: 20px; height: 20px; bottom: -10px; }
+}
